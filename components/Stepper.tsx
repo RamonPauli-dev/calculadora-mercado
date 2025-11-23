@@ -7,7 +7,12 @@ interface StepperProps {
   max?: number;
 }
 
-export default function Stepper({ value, onChange, min = 1, max = 999 }: StepperProps) {
+export default function Stepper({
+  value,
+  onChange,
+  min = 1,
+  max = 999,
+}: StepperProps) {
   const increment = () => {
     if (value < max) {
       onChange(value + 1);
@@ -28,31 +33,33 @@ export default function Stepper({ value, onChange, min = 1, max = 999 }: Stepper
   };
 
   return (
-    <div className="flex items-center border border-white-500 rounded-lg bg-gray-700 overflow-hidden">
+    <div className="border-white-500 flex items-center overflow-hidden rounded-lg border bg-gray-700">
       {/* Botão - */}
       <button
         onClick={decrement}
         disabled={value <= min}
-        className="px-3 py-2 bg-white-600 text-white disabled:bg-gray-600 disabled:cursor-not-allowed hover:bg-white-700 transition-colors active:scale-95"
+        className="bg-white-600 hover:bg-white-700 px-3 py-2 text-white transition-colors active:scale-95 disabled:cursor-not-allowed disabled:bg-gray-600"
       >
         −
       </button>
-      
+
       {/* Input central */}
       <input
         type="number"
+        inputMode="numeric" // Teclado numérico simples
+        pattern="[0-9]*" // Apenas números
         value={value}
         onChange={handleInputChange}
         min={min}
         max={max}
-        className="w-12 text-center bg-gray-700 text-white border-none outline-none py-2 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+        className="w-12 [appearance:textfield] border-none bg-gray-700 py-2 text-center text-white outline-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
       />
-      
+
       {/* Botão + */}
       <button
         onClick={increment}
         disabled={value >= max}
-        className="px-3 py-2 bg-white-600 text-white disabled:bg-gray-600 disabled:cursor-not-allowed hover:bg-white-700 transition-colors active:scale-95"
+        className="bg-white-600 hover:bg-white-700 px-3 py-2 text-white transition-colors active:scale-95 disabled:cursor-not-allowed disabled:bg-gray-600"
       >
         +
       </button>

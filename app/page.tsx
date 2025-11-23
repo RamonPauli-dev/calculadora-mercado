@@ -33,29 +33,29 @@ export default function ShoppingCalculator() {
   };
 
   const removeProduct = (id: string) => {
-    setProducts(products.filter(product => product.id !== id));
+    setProducts(products.filter((product) => product.id !== id));
   };
 
-  const total = products.reduce((sum, product) => sum + (product.price * product.quantity), 0);
+  const total = products.reduce(
+    (sum, product) => sum + product.price * product.quantity,
+    0
+  );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-white-900 p-3 safe-area-inset">
-      <div className="max-w-md mx-auto">
-        <header className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-white-300 mb-1">
+    <div className="to-white-900 safe-area-inset min-h-screen bg-gradient-to-br from-gray-900 p-3">
+      <div className="mx-auto max-w-md">
+        <header className="mb-6 text-center">
+          <h1 className="text-white-300 mb-1 text-2xl font-bold">
             Calculadora de Mercado
           </h1>
         </header>
 
-        <CardBalance 
+        <CardBalance
           cardBalance={cardBalance}
           onCardBalanceChange={setCardBalance}
         />
 
-        <PurchaseSummary 
-          total={total}
-          cardBalance={cardBalance}
-        />
+        <PurchaseSummary total={total} cardBalance={cardBalance} />
 
         <ProductForm
           productName={productName}
@@ -67,11 +67,7 @@ export default function ShoppingCalculator() {
           onAddProduct={addProduct}
         />
 
-        <ProductList
-          products={products}
-          onRemoveProduct={removeProduct}
-        />
-
+        <ProductList products={products} onRemoveProduct={removeProduct} />
       </div>
     </div>
   );
